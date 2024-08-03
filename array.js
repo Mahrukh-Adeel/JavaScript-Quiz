@@ -29,3 +29,54 @@ let sum =array.reduce((add, val) => add+val, 0);
 console.log(sum)
 
 //Write a function that uses map to extract the names of all users from an array of user objects (each user object contains name and age properties).
+const users = [
+    {
+        name: "M",
+        age: 21
+    },
+    {
+        name: "B",
+        age: 31
+    },
+    {
+        name: "C",
+        age: 35
+    }
+]
+const names =(array) => {
+    return array.map(({ name }) => ({ name }));
+};
+console.log(names(users));
+
+//Write a function that uses filter to get all the users older than 30 from an array of user objects.
+const older = (array) =>(
+    array.filter(({ age }) => age > 30)
+);
+console.log(older(users));
+
+//Use reduce to create an object that contains the counts of each unique element in an array.
+let array1= [2,7,2,5,9,2,7]
+const count = (array1) => {
+    return array1.reduce((acc, item) => {
+        acc[item] = (acc[item] || 0) + 1;
+        return acc;
+    }, {}); 
+};
+console.log(count(array1))
+
+//Write a function to flatten a nested array using the reduce method.
+let array2=[1,[2,3,4],5,[6,7]]
+const flat = (array2) => {
+    return array2.reduce((acc, item) => {
+        return acc.concat(Array.isArray(item) ? flat(item) : item);
+    }, []);
+};
+console.log(flat(array2))
+
+//Use filter and map together to get an array of names of users older than 30 from an array of user objects.
+const olders = (array) =>(
+    array.filter(({ age }) => age > 30)
+    .map(({name})=>({name}))
+);
+console.log(olders(users));
+
