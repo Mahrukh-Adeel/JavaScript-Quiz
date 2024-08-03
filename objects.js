@@ -80,3 +80,46 @@ let deepM= deepMerge(VsUser, regUser)
 console.log(deepM)
 
 //Write a function to update the properties of an object using another object.
+let user2={
+    email: "abc@gmail.com"
+}
+const updateObject = (target, source) => {
+    for (const key of Object.keys(source)) {
+        if (source[key] instanceof Object && target[key] instanceof Object) {
+            updateObject(target[key], source[key]);
+        } else {
+            target[key] = source[key];
+        }
+    }
+};
+updateObject(regUser, user2);
+console.log(regUser);
+
+//Write a function that takes an array of objects and returns an object where the keys are the values of a specified property from each object, and the values are arrays of the remaining properties.
+const users = [
+    {
+        name: "M",
+        location: "isl",
+        loggedIn: false,
+        [Symbol("Mysym")]: "MyKey1",
+        PCode: 1234
+    },
+    {
+        name: "A",
+        location: "xyz",
+        loggedIn: true,
+        [Symbol("Mysym")]: "MyKey2",
+        PCode: 5678
+    }
+];
+const transform = (array, keys) => {
+    return array.reduce((res, obj) => {
+        const key = obj[keys];
+        const remainingProps = Object.keys(obj).filter(key => key !== keys)
+                                               .map(key => obj[key]);
+        res[key] = remainingProps;
+        return res;
+    }, {});
+}
+kv= transform(users,"name")
+console.log(kv)
